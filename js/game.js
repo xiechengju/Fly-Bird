@@ -41,6 +41,9 @@ Game.prototype = {
 			// 调用渲染方法
 			that.draw(imgList);
 
+			that.countEvent();
+
+
 		});
 	},
 
@@ -148,8 +151,28 @@ Game.prototype = {
   	that.cv.addEventListener('click', function() {
   		that.hero.changeSpeed( -0.3 );
   	});
+	},
+		// 积分事件
+	countEvent:function(){
+		var timer = null;
+   		var count = 0;
+		var time = document.querySelector('.time p');
+		var that  = this;
+		timer = setInterval(function(){
+		if(that.isStart){
+		count++;
+		console.log(count);
+		var str = '得分:' + count;
+		time.innerText = str;
+		}else{
+		clearInterval(timer);
+        }
+    },10)
 	}
 };
+
+
+
 
 Fly.Game = Game;
 
