@@ -43,12 +43,12 @@ FlyObj.createCV = function( id ) {
   var dv = document.getElementById(id);
 
   var cv = document.createElement('canvas');
-  cv.height = 600;
-  cv.width = 800;
+  cv.height =  600;
+  cv.width = 800 ;
 
   dv.appendChild( cv );
 
-  return cv;
+    return cv;
 };
 
 // 添加一个工厂方法，用来创建所有的对象

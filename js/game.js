@@ -4,6 +4,8 @@
 // 当前这个游戏对象！
 // 有别与我们的Fly对象， Fly是整个游戏暴露到全局环境中的一个全局对象！
 // 而 Game 与 Bird 等对象一样，都是属于 Fly 的一部分！
+var restart = document.querySelector('.start');
+
 var Game = function( id ) {
 	// 根据用户传入的id创建canvas对象
 	this.cv = Fly.createCV( id );
@@ -19,6 +21,7 @@ var Game = function( id ) {
 	this.imgSrc = ['birds', 'land', 'sky', 'pipe1', 'pipe2'];
 
 	this.lastFrameTime = new Date();
+
 	this.curFrameTime = 0;
 };
 
@@ -40,17 +43,25 @@ Game.prototype = {
 
 			// 调用渲染方法
 			that.draw(imgList);
-
+			// 调用分数方法
 			that.countEvent();
 
-
+			that.startClick();
 		});
 	},
-
+	// 重新开始游戏
+	startClick:function(){
+		
+		restart.addEventListener('click',function(){
+			　location.reload()
+			// console.log(isStart);
+		});
+	},
 	// 结束游戏
 	stopGame: function() {
-
 		this.isStart = false;
+		restart.style.display = "block";
+		
 	},
 
 	// 初始化角色
@@ -130,6 +141,7 @@ Game.prototype = {
 	   	if(that.hero.y <= 0 || (that.hero.y >= that.cv.height - imgList.land.height) || that.ctx.isPointInPath(that.hero.x, that.hero.y)) {
 
 	   		that.isStart = false;
+			restart.style.display = 'block'; 
 	   	}
 
 	    // 恢复到默认状态
